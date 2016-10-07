@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Domain.Models.History>
+@{
+    ViewBag.Title = "History";
+}
+
+<h2>History</h2>
+
+<table>
+    <tr>
+        <th>Операция</th>
+        @foreach (var oper in Model)
+            {
+        <tr>
+            <td></td>
+            <td>@oper.X </td>
+            <td>@oper.Operation     </td>
+            <td>@oper.Y </td>
+            <td>= @oper.Result</td>
+            
+            <td> date: @oper.CreationDate</td>
+        </tr>
+        }
+        </tr>
+    </table>
+
