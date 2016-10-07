@@ -16,10 +16,8 @@ namespace WindowsFormsApplication1
 {
     public partial class formCalculator : Form
     {
-
         private Helper Calc { get; set; }
         private History HistoryFiles { get; set; }
-
         private string ActiveOperation { get; set; }
 
         public formCalculator()
@@ -28,26 +26,21 @@ namespace WindowsFormsApplication1
             Calc = new Helper();
             HistoryFiles = new History();
 
-            // получить все методы с Calc
             var methods = Calc.metods();
-            // ЦИКЛ по методам
             var count = 0;
             this.panel1.SuspendLayout();
             foreach (var m in methods)
             {
-                // для каждого метода _ свой радио
                 CreateRadioButton(m.Name, count++);
-                //m.Name;
             }
             this.panel1.ResumeLayout();
             HistoryFiles.HistoryLoad(ref rtbHistory);
         }
+
         private void CreateRadioButton(string Name, int index)
         {
             var rbBtn = new RadioButton();
-
             this.panel1.Controls.Add(rbBtn);
-            
 
             rbBtn.AutoSize = true;
             rbBtn.Location = new System.Drawing.Point(2, 1 + index * 18);
@@ -61,7 +54,6 @@ namespace WindowsFormsApplication1
             rbBtn.CheckedChanged += new System.EventHandler(this.radio_CheckedChanged);
         }
 
-
         private void btnCalc_Click(object sender, EventArgs e)
         {
             double x = 0;
@@ -71,20 +63,14 @@ namespace WindowsFormsApplication1
             {
                 rtbHistory.Text += string.Format("При вводе данных была ошибка " + Environment.NewLine);
                 return;
-            }           
-
-            //magic
-
+            }
             var calcType = Calc.GetType();
             var method = calcType.GetMethod(ActiveOperation);
             var result = method.Invoke(Calc, new object[] { x, y });
-            //Calc.Sum(x, y);
 
             lblResult.Text = result.ToString();
-
             rtbHistory.Text += string.Format("{0} {1} {2} = {3}{4}", x, ActiveOperation, y, result, Environment.NewLine);
         }
-
 
         private void radio_CheckedChanged(object sender, EventArgs e)
         {
@@ -96,15 +82,9 @@ namespace WindowsFormsApplication1
             ActiveOperation = rb.Tag.ToString();
         }
 
-        private void txtX_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            
-        }
-
         private void formCalculator_FormClosing(object sender, FormClosingEventArgs e)
         {
             HistoryFiles.HistorySave(ref rtbHistory);
         }
-
     }
 }

@@ -23,8 +23,8 @@ namespace HistoryFiles
             StreamWriter writers = new StreamWriter("history.txt", false, Encoding.GetEncoding(1251));
             for (int i = 0; rtb1.Lines.Length > i; i++)
             {
-                if(rtb1.Lines[i].ToString() != "")
-                writers.WriteLine(rtb1.Lines[i].ToString());
+                if (rtb1.Lines[i].ToString() != "")
+                    writers.WriteLine(rtb1.Lines[i].ToString());
             }
             writers.Close();
         }
