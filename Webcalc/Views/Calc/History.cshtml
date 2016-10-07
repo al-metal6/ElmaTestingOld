@@ -5,8 +5,14 @@
 
 <h2>Операция</h2>
 
-<table border="1">
+<table border="1" cellpadding="7">
     <tr>
+        <th>X</th>
+        <th>Операция</th>
+        <th>Y</th>
+        <th>=</th>
+        <th>Результат</th>
+        <th>Дата</th>
         @foreach (var oper in Model)
             {
         <tr>
@@ -15,7 +21,7 @@
             <td>@oper.Y </td>
             <td>=</td>
             <td>@oper.Result</td>
-            <td>date: @oper.CreationDate</td>
+            <td>@oper.CreationDate</td>
         </tr>
         }
         </tr>
